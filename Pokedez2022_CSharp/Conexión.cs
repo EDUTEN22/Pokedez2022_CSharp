@@ -36,6 +36,46 @@ namespace Pokedez2022_CSharp
             {
                 throw e;
             }
+
         }
+        public DataTable preEvoulicion(int id)
+        {
+
+            try
+            {
+                conexion.Open();
+                MySqlCommand consulta = new MySqlCommand("SELECT * FROM pokemon WHERE id=(SELECT preEvolucion FROM pokemon WHERE id='" + id + "')", conexion);
+                MySqlDataReader resultado = consulta.ExecuteReader();
+                DataTable pokemons = new DataTable();
+                pokemons.Load(resultado);
+                conexion.Close();
+                return pokemons;
+            }
+            catch (MySqlException e)
+            {
+                throw e;
+            }
+
+        }
+        public DataTable posEvoulicion(int id)
+        {
+
+            try
+            {
+                conexion.Open();
+                MySqlCommand consulta = new MySqlCommand("SELECT * FROM pokemon WHERE id=(SELECT posEvolucion FROM pokemon WHERE id='" + id + "')", conexion);
+                MySqlDataReader resultado = consulta.ExecuteReader();
+                DataTable pokemons = new DataTable();
+                pokemons.Load(resultado);
+                conexion.Close();
+                return pokemons;
+            }
+            catch (MySqlException e)
+            {
+                throw e;
+            }
+
+        }
+
     }
 }

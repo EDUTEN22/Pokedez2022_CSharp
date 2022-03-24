@@ -90,6 +90,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexión.cs" />
+    <Compile Include="ventanaEvoluciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ventanaEvoluciones.Designer.cs">
+      <DependentUpon>ventanaEvoluciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="VentanaPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ventanaEvoluciones.resx">
+      <DependentUpon>ventanaEvoluciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VentanaPrincipal.resx">
       <DependentUpon>VentanaPrincipal.cs</DependentUpon>
     </EmbeddedResource>
