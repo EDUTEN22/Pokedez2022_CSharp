@@ -15,14 +15,14 @@ namespace Pokedez2022_CSharp
     {
         Conexión miConexion = new Conexión();
         DataTable misPokemons = new DataTable();
-        DataTable evoluciones1 = new DataTable();
-        DataTable evoluciones2= new DataTable();
-        DataTable evoluciones3= new DataTable();
-        DataTable evoluciones4= new DataTable();
+        DataTable misPokemons2 = new DataTable();
+        DataTable misPokemons3= new DataTable();
+        DataTable misPokemons4= new DataTable();
+        DataTable misPokemons5= new DataTable();
 
         int idActual = 1;//guarda el id del pokemon
-        int idAnterior = 0;
-            int idSiguiente = 2;
+        int idAnterior = 150;
+            int idSiguiente = 1;
 
         public VentanaPrincipal()
         {
@@ -39,6 +39,16 @@ namespace Pokedez2022_CSharp
             button2.FlatAppearance.MouseDownBackColor = Color.Transparent;
             button2.FlatAppearance.MouseOverBackColor = Color.Transparent;
             button2.BackColor = Color.Transparent;
+            button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button3.FlatAppearance.BorderSize = 0;
+            button3.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button3.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button3.BackColor = Color.Transparent;
+            button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button4.FlatAppearance.BorderSize = 0;
+            button4.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button4.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button4.BackColor = Color.Transparent;
 
 
             label2.Hide();
@@ -68,10 +78,10 @@ namespace Pokedez2022_CSharp
             }
                 
                 misPokemons = miConexion.getPokemonPorId(idActual);
-                evoluciones1 = miConexion.preEvoulicion(idActual);
-                evoluciones2 = miConexion.posEvoulicion(idActual);
-                evoluciones3 = miConexion.preEvoulicion(idAnterior);
-                evoluciones4 = miConexion.posEvoulicion(idSiguiente);
+                misPokemons2 = miConexion.preEvoulicion(idActual);
+                misPokemons3 = miConexion.posEvoulicion(idActual);
+                misPokemons4 = miConexion.preEvoulicion(idAnterior);
+                misPokemons5 = miConexion.posEvoulicion(idSiguiente);
                 nombrePokemons.Text = misPokemons.Rows[0]["nombre"].ToString();
                 pictureBox1.Image = convierteBlobAImagen((byte[])misPokemons.Rows[0]["imagen"]);
             
@@ -95,10 +105,10 @@ namespace Pokedez2022_CSharp
 
             misPokemons = miConexion.getPokemonPorId(idActual);
                 misPokemons = miConexion.getPokemonPorId(idActual);
-                evoluciones1 = miConexion.preEvoulicion(idActual);
-                evoluciones2 = miConexion.posEvoulicion(idActual);
-                evoluciones3 = miConexion.preEvoulicion(idAnterior);
-                evoluciones4 = miConexion.posEvoulicion(idSiguiente);
+                misPokemons2 = miConexion.preEvoulicion(idActual);
+                misPokemons3 = miConexion.posEvoulicion(idActual);
+                misPokemons4 = miConexion.preEvoulicion(idAnterior);
+                misPokemons5 = miConexion.posEvoulicion(idSiguiente);
                 nombrePokemons.Text = misPokemons.Rows[0]["nombre"].ToString();
                 Altura.Text = misPokemons.Rows[0]["altura"].ToString();
                 Peso.Text = misPokemons.Rows[0]["peso"].ToString();
@@ -124,7 +134,7 @@ namespace Pokedez2022_CSharp
         {
             label2.Show();
             misPokemons = miConexion.getPokemonPorId(idActual);
-            label2.Text = misPokemons.Rows[0]["descripcion"].ToString() + "\r\n Movimiento 1: " + misPokemons.Rows[0]["Movimiento1"].ToString()+"\r\n Movimiento 2: " +misPokemons.Rows[0]["movimiento2"].ToString()+"\r\n Movimiento 3: "  + misPokemons.Rows[0]["movimiento3"].ToString() + "\r\n Movimiento 4: " + misPokemons.Rows[0]["movimiento4"].ToString();
+            label2.Text = misPokemons.Rows[0]["descripcion"].ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -147,25 +157,35 @@ namespace Pokedez2022_CSharp
            
             ventanaEvolusiones ventana = new ventanaEvolusiones();
             ventana.Show();
-            ventana.imagenEvolucion3(convierteBlobAImagen((Byte[])misPokemons.Rows[0]["imagen"]));
+            ventana.imagenEvolucion(convierteBlobAImagen((Byte[])misPokemons.Rows[0]["imagen"]));
             if (misPokemons.Rows[0]["posEvolucion"].ToString() != "")
             {
-                ventana.imagenEvolucion(convierteBlobAImagen((Byte[])evoluciones2.Rows[0]["imagen"]));
+                ventana.imagenEvolucion3(convierteBlobAImagen((Byte[])misPokemons3.Rows[0]["imagen"]));
             }
-            else if (misPokemons.Rows[0]["preEvolucion"].ToString() != "" && evoluciones1.Rows[0]["preEvolucion"].ToString() != "")
+            else if (misPokemons.Rows[0]["preEvolucion"].ToString() != "" && misPokemons2.Rows[0]["preEvolucion"].ToString() != "")
             {
-                ventana.imagenEvolucion(convierteBlobAImagen((Byte[])evoluciones3.Rows[0]["imagen"]));
+                ventana.imagenEvolucion3(convierteBlobAImagen((Byte[])misPokemons4.Rows[0]["imagen"]));
             }
 
 
             if (misPokemons.Rows[0]["preEvolucion"].ToString() != "")
             {
-                ventana.imagenEvolucion2(convierteBlobAImagen((Byte[])evoluciones1.Rows[0]["imagen"]));
+                ventana.imagenEvolucion2(convierteBlobAImagen((Byte[])misPokemons2.Rows[0]["imagen"]));
             }
-            else if (misPokemons.Rows[0]["posEvolucion"].ToString() != "" && evoluciones2.Rows[0]["posEvolucion"].ToString() != "")
+            else if (misPokemons.Rows[0]["posEvolucion"].ToString() != "" && misPokemons3.Rows[0]["posEvolucion"].ToString() != "")
             {
-                ventana.imagenEvolucion2(convierteBlobAImagen((Byte[])evoluciones4.Rows[0]["imagen"]));
+                ventana.imagenEvolucion2(convierteBlobAImagen((Byte[])misPokemons5.Rows[0]["imagen"]));
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            label2.Text = " Movimiento 1: " +misPokemons.Rows[0]["Movimiento1"].ToString() + "\r\n Movimiento 2: " + misPokemons.Rows[0]["movimiento2"].ToString() + "\r\n Movimiento 3: " + misPokemons.Rows[0]["movimiento3"].ToString() + "\r\n Movimiento 4: " + misPokemons.Rows[0]["movimiento4"].ToString();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            label2.Text = misPokemons.Rows[0]["descripcion"].ToString();
         }
     }
 }
